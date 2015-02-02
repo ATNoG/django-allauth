@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
+from django.conf import settings
 
 from ..utils import (import_attribute,
                      email_address_exists,
@@ -158,6 +159,16 @@ class DefaultSocialAccountAdapter(object):
         Next to simply returning True/False you can also intervene the
         regular flow by raising an ImmediateHttpResponse
         """
+        try:
+            enabled = getattr(settings, 'SOCIALACCOUNT_SIGNUP_ENABLED', True)
+            if not enabled:
+                print(' [ DEBUG ] Sign up is not enabled. ')
+                return False
+            else:
+                pass
+        except Exception:
+            pass
+
         return get_account_adapter().is_open_for_signup(request)
 
 
