@@ -25,7 +25,8 @@ class UaProvider(OAuthProvider):
         return data['uu']
 
     def extract_common_fields(self, data):
-        return dict(username=data.get('name'), email=data.get('uu'), name=data.get('name'))
+        return dict(username=data.get('uu'), email=data.get('uu'),
+                    name=data.get('name'), first_name=data.get('firstname'), last_name=data.get('surname'))
 
 
 providers.registry.register(UaProvider)

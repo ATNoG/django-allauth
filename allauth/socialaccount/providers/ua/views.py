@@ -50,6 +50,8 @@ class UaAPI(OAuth):
         name = '%s %s' % (obj['name'], obj['surname'])
         user = {
             'uu': email,
+            'firstname': obj['name'],
+            'surname': obj['surname'],
             'name': name
         }
 
